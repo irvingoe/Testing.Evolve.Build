@@ -34,6 +34,10 @@ namespace Testing.Evolve.Build
         {
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/site.css"));
+            bundles.Add(new ScriptBundle("~/bundles/evolveApp")
+            .IncludeDirectory("~/Scripts/Controllers", "*.js")
+            .IncludeDirectory("~/Scripts/Factories", "*.js")
+            .Include("~/Scripts/evolveApp.js"));
 
             BundleTable.EnableOptimizations = true;
         }
