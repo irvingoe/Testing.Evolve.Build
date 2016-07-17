@@ -172,6 +172,9 @@
     <Compile Include="Build.cs">
       <DependentUpon>Evolve.tt</DependentUpon>
     </Compile>
+    <Compile Include="Character.cs">
+      <DependentUpon>Evolve.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoutesDemoController.cs" />
@@ -196,7 +199,13 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Perk.cs">
+      <DependentUpon>Evolve.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role.cs">
+      <DependentUpon>Evolve.tt</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

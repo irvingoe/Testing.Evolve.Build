@@ -26,5 +26,8 @@ namespace Testing.Evolve.Build
         }
     
         public virtual DbSet<Build> Build { get; set; }
+        public virtual DbSet<Character> Characters { get; set; }
+        public virtual DbSet<Perk> Perks { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
     }
 }
