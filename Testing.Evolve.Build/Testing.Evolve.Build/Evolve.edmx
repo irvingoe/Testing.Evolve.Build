@@ -72,6 +72,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Perks_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Perks" Type="Self.Perks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Perks">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="AppEvolveBuilderModelStoreContainer">
           <EntitySet Name="Build" EntityType="Self.Build" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Characters" EntityType="Self.Characters" Schema="dbo" store:Type="Tables" />
@@ -80,6 +92,10 @@
           <AssociationSet Name="FK_Characters_Roles" Association="Self.FK_Characters_Roles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Characters" EntitySet="Characters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Perks_Roles" Association="Self.FK_Perks_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Perks" EntitySet="Perks" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -94,6 +110,10 @@
           <AssociationSet Name="FK_Characters_Roles" Association="App.Evolve.BuilderModel.FK_Characters_Roles">
             <End Role="Role" EntitySet="Roles" />
             <End Role="Character" EntitySet="Characters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Perks_Roles" Association="App.Evolve.BuilderModel.FK_Perks_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Perk" EntitySet="Perks" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Build">
@@ -138,6 +158,7 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="Deleted" Type="Boolean" />
+          <NavigationProperty Name="Role1" Relationship="App.Evolve.BuilderModel.FK_Perks_Roles" FromRole="Perk" ToRole="Role" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -152,6 +173,7 @@
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="Deleted" Type="Boolean" />
           <NavigationProperty Name="Characters" Relationship="App.Evolve.BuilderModel.FK_Characters_Roles" FromRole="Role" ToRole="Character" />
+          <NavigationProperty Name="Perks" Relationship="App.Evolve.BuilderModel.FK_Perks_Roles" FromRole="Role" ToRole="Perk" />
         </EntityType>
         <Association Name="FK_Characters_Roles">
           <End Type="App.Evolve.BuilderModel.Role" Role="Role" Multiplicity="1" />
@@ -161,6 +183,18 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Character">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Perks_Roles">
+          <End Type="App.Evolve.BuilderModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="App.Evolve.BuilderModel.Perk" Role="Perk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Perk">
               <PropertyRef Name="Role" />
             </Dependent>
           </ReferentialConstraint>

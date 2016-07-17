@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="App.Evolve.BuilderModel.Perk" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="App.Evolve.BuilderModel.Role" Width="1.5" PointX="3.75" PointY="1.125" />
         <AssociationConnector Association="App.Evolve.BuilderModel.FK_Characters_Roles" />
+        <AssociationConnector Association="App.Evolve.BuilderModel.FK_Perks_Roles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

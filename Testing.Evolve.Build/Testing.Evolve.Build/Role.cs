@@ -18,6 +18,7 @@ namespace Testing.Evolve.Build
         public Role()
         {
             this.Characters = new HashSet<Character>();
+            this.Perks = new HashSet<Perk>();
         }
     
         public int ID { get; set; }
@@ -31,5 +32,7 @@ namespace Testing.Evolve.Build
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Character> Characters { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Perk> Perks { get; set; }
     }
 }

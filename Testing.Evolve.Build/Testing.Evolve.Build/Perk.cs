@@ -25,5 +25,7 @@ namespace Testing.Evolve.Build
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> LastModifiedDate { get; set; }
         public Nullable<bool> Deleted { get; set; }
+    
+        public virtual Role Role1 { get; set; }
     }
 }
