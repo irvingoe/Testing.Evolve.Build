@@ -207,6 +207,7 @@
       <DependentUpon>Evolve.edmx</DependentUpon>
       <LastGenOutput>Evolve.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Evolve.edmx.sql" />
     <Content Include="Evolve.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Evolve.edmx</DependentUpon>
