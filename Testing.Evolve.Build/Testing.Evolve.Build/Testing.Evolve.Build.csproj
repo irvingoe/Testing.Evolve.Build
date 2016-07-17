@@ -52,6 +52,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -167,9 +169,27 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Build.cs">
+      <DependentUpon>Evolve.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoutesDemoController.cs" />
+    <Compile Include="Evolve.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Evolve.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evolve.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Evolve.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Evolve.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Evolve.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -182,6 +202,16 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Evolve.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Evolve.edmx</DependentUpon>
+      <LastGenOutput>Evolve.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Evolve.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Evolve.edmx</DependentUpon>
+      <LastGenOutput>Evolve.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -189,6 +219,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <EntityDeploy Include="Evolve.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Evolve.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Evolve.edmx.diagram">
+      <DependentUpon>Evolve.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\testevolvebuild %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\testevolvebuild.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
@@ -232,6 +269,9 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
