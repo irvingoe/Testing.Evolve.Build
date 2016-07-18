@@ -17,86 +17,8 @@
           <Property Name="IPTrack" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Deleted" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
-        <EntityType Name="Characters">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Role" Type="int" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="150" />
-          <Property Name="ImageUrl" Type="varchar" MaxLength="150" />
-          <Property Name="Image" Type="image" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="LastModifiedDate" Type="datetime" />
-          <Property Name="Deleted" Type="nchar" MaxLength="10" />
-        </EntityType>
-        <EntityType Name="Perks">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Role" Type="int" Nullable="false" />
-          <Property Name="Stage" Type="int" Nullable="false" />
-          <Property Name="Tier" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="150" />
-          <Property Name="ImageUrl" Type="varchar" MaxLength="150" />
-          <Property Name="Image" Type="image" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="LastModifiedDate" Type="datetime" />
-          <Property Name="Deleted" Type="bit" />
-        </EntityType>
-        <EntityType Name="Roles">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="150" />
-          <Property Name="ImageUrl" Type="varchar" MaxLength="150" />
-          <Property Name="Image" Type="image" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="LastModifiedDate" Type="datetime" />
-          <Property Name="Deleted" Type="bit" />
-        </EntityType>
-        <Association Name="FK_Characters_Roles">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
-          <End Role="Characters" Type="Self.Characters" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Roles">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Characters">
-              <PropertyRef Name="Role" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Perks_Roles">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
-          <End Role="Perks" Type="Self.Perks" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Roles">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Perks">
-              <PropertyRef Name="Role" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="AppEvolveBuilderModelStoreContainer">
           <EntitySet Name="Build" EntityType="Self.Build" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Characters" EntityType="Self.Characters" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Perks" EntityType="Self.Perks" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Characters_Roles" Association="Self.FK_Characters_Roles">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="Characters" EntitySet="Characters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Perks_Roles" Association="Self.FK_Perks_Roles">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="Perks" EntitySet="Perks" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -218,53 +140,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-          <EntitySetMapping Name="Characters">
-            <EntityTypeMapping TypeName="App.Evolve.BuilderModel.Character">
-              <MappingFragment StoreEntitySet="Characters">
-                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Perks">
-            <EntityTypeMapping TypeName="App.Evolve.BuilderModel.Perk">
-              <MappingFragment StoreEntitySet="Perks">
-                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Tier" ColumnName="Tier" />
-                <ScalarProperty Name="Stage" ColumnName="Stage" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="App.Evolve.BuilderModel.Role">
-              <MappingFragment StoreEntitySet="Roles">
-                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Role1" ColumnName="Role" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-  </EntityContainerMapping>
+          </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
