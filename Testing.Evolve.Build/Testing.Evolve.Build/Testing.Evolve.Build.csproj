@@ -212,6 +212,11 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Images\Assault.svg" />
+    <Content Include="Content\Images\Medic.svg" />
+    <Content Include="Content\Images\Monster.svg" />
+    <Content Include="Content\Images\Support.svg" />
+    <Content Include="Content\Images\Trapper.svg" />
     <Content Include="Content\metro-bootstrap.css" />
     <Content Include="Content\metro-bootstrap.min.css" />
     <Content Include="Evolve.Context.tt">

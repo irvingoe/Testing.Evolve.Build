@@ -32,13 +32,13 @@ namespace Testing.Evolve.Build
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/css")
+                .Include("~/Content/site.css")
+                .Include("~/Content/metro-bootstrap.css"));
             bundles.Add(new ScriptBundle("~/bundles/evolveApp")
             .IncludeDirectory("~/Scripts/Controllers", "*.js")
             .IncludeDirectory("~/Scripts/Factories", "*.js")
             .Include("~/Scripts/evolveApp.js"));
-
             BundleTable.EnableOptimizations = true;
         }
     }
