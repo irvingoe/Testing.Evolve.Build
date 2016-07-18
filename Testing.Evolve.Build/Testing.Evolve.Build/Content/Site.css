@@ -16,6 +16,14 @@ svg {
 
 .svg-fullscreen {
     width: 100%;
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+.svg-fullscreen:hover {
+    width: 100%;
+    opacity: 1.0;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
 }
 
 .Monster {
