@@ -5,12 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7dd4a97283714f93b4dd4542a9315425" Name="Diagram1" ZoomLevel="62" >
-        <EntityTypeShape EntityType="App.Evolve.BuilderModel.Build" Width="1.5" PointX="1.125" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="App.Evolve.BuilderModel.Character" Width="1.5" PointX="6" PointY="1" />
-        <EntityTypeShape EntityType="App.Evolve.BuilderModel.Perk" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="App.Evolve.BuilderModel.Role" Width="1.5" PointX="3.75" PointY="1.125" />
-        <AssociationConnector Association="App.Evolve.BuilderModel.FK_Characters_Roles" />
-        <AssociationConnector Association="App.Evolve.BuilderModel.FK_Perks_Roles" />
+        <EntityTypeShape EntityType="App.Evolve.BuilderModel.Build" Width="1.5" PointX="1.125" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="App.Evolve.BuilderModel.Perk" Width="1.5" PointX="6" PointY="5.25" />
+        <EntityTypeShape EntityType="App.Evolve.BuilderModel.Character" Width="1.5" PointX="6" PointY="1.375" />
+        <EntityTypeShape EntityType="App.Evolve.BuilderModel.Role" Width="1.5" PointX="3.75" PointY="3.375" />
+        <AssociationConnector Association="App.Evolve.BuilderModel.FK_Character_Role" />
+        <AssociationConnector Association="App.Evolve.BuilderModel.FK_Perk_Role" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

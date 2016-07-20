@@ -17,7 +17,6 @@ namespace Testing.Evolve.Build
         public int ID { get; set; }
         public string Name { get; set; }
         public int Role { get; set; }
-        public int Stage { get; set; }
         public string Tier { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }

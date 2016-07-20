@@ -17,8 +17,85 @@
           <Property Name="IPTrack" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Deleted" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="Character">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="150" />
+          <Property Name="ImageUrl" Type="varchar" MaxLength="50" />
+          <Property Name="Image" Type="image" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Perk">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="int" Nullable="false" />
+          <Property Name="Tier" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="150" />
+          <Property Name="ImageUrl" Type="varchar" MaxLength="150" />
+          <Property Name="Image" Type="image" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ImageUrl" Type="varchar" MaxLength="150" />
+          <Property Name="Image" Type="image" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Character_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Character" Type="Self.Character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Character">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Perk_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Perk" Type="Self.Perk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Perk">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="AppEvolveBuilderModelStoreContainer">
           <EntitySet Name="Build" EntityType="Self.Build" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Character" EntityType="Self.Character" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Perk" EntityType="Self.Perk" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Character_Role" Association="Self.FK_Character_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Character" EntitySet="Character" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Perk_Role" Association="Self.FK_Perk_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Perk" EntitySet="Perk" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -26,14 +103,14 @@
       <Schema Namespace="App.Evolve.BuilderModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="Build" EntityType="App.Evolve.BuilderModel.Build" />
-          <EntitySet Name="Characters" EntityType="App.Evolve.BuilderModel.Character" />
           <EntitySet Name="Perks" EntityType="App.Evolve.BuilderModel.Perk" />
+          <EntitySet Name="Characters" EntityType="App.Evolve.BuilderModel.Character" />
           <EntitySet Name="Roles" EntityType="App.Evolve.BuilderModel.Role" />
-          <AssociationSet Name="FK_Characters_Roles" Association="App.Evolve.BuilderModel.FK_Characters_Roles">
+          <AssociationSet Name="FK_Character_Role" Association="App.Evolve.BuilderModel.FK_Character_Role">
             <End Role="Role" EntitySet="Roles" />
             <End Role="Character" EntitySet="Characters" />
           </AssociationSet>
-          <AssociationSet Name="FK_Perks_Roles" Association="App.Evolve.BuilderModel.FK_Perks_Roles">
+          <AssociationSet Name="FK_Perk_Role" Association="App.Evolve.BuilderModel.FK_Perk_Role">
             <End Role="Role" EntitySet="Roles" />
             <End Role="Perk" EntitySet="Perks" />
           </AssociationSet>
@@ -50,29 +127,13 @@
           <Property Name="IPTrack" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Deleted" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
         </EntityType>
-        <EntityType Name="Character">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Role" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="ImageUrl" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="Deleted" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Role1" Relationship="App.Evolve.BuilderModel.FK_Characters_Roles" FromRole="Character" ToRole="Role" />
-        </EntityType>
         <EntityType Name="Perk">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Role" Type="Int32" Nullable="false" />
-          <Property Name="Stage" Type="Int32" Nullable="false" />
           <Property Name="Tier" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="ImageUrl" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
@@ -80,24 +141,39 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="Deleted" Type="Boolean" />
-          <NavigationProperty Name="Role1" Relationship="App.Evolve.BuilderModel.FK_Perks_Roles" FromRole="Perk" ToRole="Role" />
+          <NavigationProperty Name="Role1" Relationship="App.Evolve.BuilderModel.FK_Perk_Role" FromRole="Perk" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Character">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" />
+          <NavigationProperty Name="Role1" Relationship="App.Evolve.BuilderModel.FK_Character_Role" FromRole="Character" ToRole="Role" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Role1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="ImageUrl" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="Deleted" Type="Boolean" />
-          <NavigationProperty Name="Characters" Relationship="App.Evolve.BuilderModel.FK_Characters_Roles" FromRole="Role" ToRole="Character" />
-          <NavigationProperty Name="Perks" Relationship="App.Evolve.BuilderModel.FK_Perks_Roles" FromRole="Role" ToRole="Perk" />
+          <NavigationProperty Name="Characters" Relationship="App.Evolve.BuilderModel.FK_Character_Role" FromRole="Role" ToRole="Character" />
+          <NavigationProperty Name="Perks" Relationship="App.Evolve.BuilderModel.FK_Perk_Role" FromRole="Role" ToRole="Perk" />
         </EntityType>
-        <Association Name="FK_Characters_Roles">
+        <Association Name="FK_Character_Role">
           <End Type="App.Evolve.BuilderModel.Role" Role="Role" Multiplicity="1" />
           <End Type="App.Evolve.BuilderModel.Character" Role="Character" Multiplicity="*" />
           <ReferentialConstraint>
@@ -109,7 +185,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Perks_Roles">
+        <Association Name="FK_Perk_Role">
           <End Type="App.Evolve.BuilderModel.Role" Role="Role" Multiplicity="1" />
           <End Type="App.Evolve.BuilderModel.Perk" Role="Perk" Multiplicity="*" />
           <ReferentialConstraint>
@@ -140,6 +216,51 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+          <EntitySetMapping Name="Perks">
+            <EntityTypeMapping TypeName="App.Evolve.BuilderModel.Perk">
+              <MappingFragment StoreEntitySet="Perk">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Tier" ColumnName="Tier" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Characters">
+            <EntityTypeMapping TypeName="App.Evolve.BuilderModel.Character">
+              <MappingFragment StoreEntitySet="Character">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="App.Evolve.BuilderModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
