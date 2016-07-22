@@ -29,6 +29,11 @@ namespace Testing.Evolve.Build.Controllers
         {
             return View();
         }
+
+        public ActionResult CharacterSelection()
+        {
+            return View();
+        }
     }
 
 }

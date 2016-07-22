@@ -12,7 +12,7 @@ evolveApp.factory('AuthHttpResponseInterceptor', AuthHttpResponseInterceptor);
 evolveApp.factory('LoginFactory', LoginFactory);
 evolveApp.factory('RegistrationFactory', RegistrationFactory);
 var configFunction = function ($stateProvider, $httpProvider, $locationProvider) {
-    $locationProvider.hashPrefix('!').html5Mode(true);
+    //$locationProvider.hashPrefix('!').html5Mode(true);
     $stateProvider
         .state('stateOne', {
             url: '/stateOne?donuts',
@@ -32,10 +32,10 @@ var configFunction = function ($stateProvider, $httpProvider, $locationProvider)
             url: '/stateTwo',
             views: {
                 "containerOne": {
-                    templateUrl: '/routesDemo/one'
+                    templateUrl: '/routesDemo/CharacterSelection'
                 },
                 "containerTwo": {
-                    templateUrl: '/routesDemo/three'
+                    templateUrl: '/routesDemo/CharacterSelection'
                 }
             }
         })

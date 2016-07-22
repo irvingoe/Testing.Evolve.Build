@@ -12,6 +12,16 @@ namespace Testing.Evolve.Build
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("fonts*.woff");
+            routes.IgnoreRoute("*.js");
+            routes.IgnoreRoute("*.html");
+            routes.IgnoreRoute("*.css");
+            routes.IgnoreRoute("api/*");
+            routes.MapRoute(
+            name: "Default",
+            url: "{controller}/{action}/{id}",
+            defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+        );
 
             routes.MapRoute(
                 name: "routeOne",
@@ -43,10 +53,10 @@ namespace Testing.Evolve.Build
                 url: "Account/Register",
                 defaults: new { controller = "Account", action = "Register" });
 
-            routes.MapRoute(
-                name: "Default",
-                url: "{*url}",
-                defaults: new { controller = "Home", action = "Index" });
+            //routes.MapRoute(
+            //    name: "Default",
+            //    url: "{*url}",
+            //    defaults: new { controller = "Home", action = "Index" });
         }
     }
 }
